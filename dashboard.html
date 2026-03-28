@@ -3,438 +3,420 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Local Memory Governance - Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>本机记忆治理 | Local Memory Governance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #1a1b1e;
-    --surface: #25262b;
-    --surface2: #2c2e33;
-    --border: #373a40;
-    --text: #c1c2c5;
-    --text-dim: #909296;
-    --text-bright: #e9ecef;
-    --accent: #748ffc;
-    --green: #69db7c;
-    --yellow: #ffd43b;
-    --orange: #ff922b;
-    --red: #ff6b6b;
-    --teal: #38d9a9;
-    --purple: #b197fc;
-    --radius: 12px;
+    --bg: #f6f1e8;
+    --panel: rgba(255, 252, 247, 0.86);
+    --panel-strong: rgba(255, 252, 248, 0.95);
+    --text: #1d1b18;
+    --text-soft: #565046;
+    --text-faint: #7a7368;
+    --line: rgba(29, 27, 24, 0.09);
+    --red: #a64d39;
+    --blue: #304a6d;
+    --green: #2f7354;
+    --gold: #b8894d;
+    --radius: 24px;
+    --shadow: 0 18px 48px rgba(41, 32, 22, 0.08);
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  * { box-sizing: border-box; }
+  a {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
   body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--bg);
+    margin: 0;
+    font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
     color: var(--text);
-    line-height: 1.6;
-    padding: 24px;
-    max-width: 1200px;
+    background:
+      radial-gradient(circle at top left, rgba(184, 137, 77, 0.09), transparent 26%),
+      linear-gradient(180deg, rgba(255,255,255,0.35), rgba(246,241,232,0.95)),
+      var(--bg);
+  }
+  .page {
+    max-width: 1180px;
     margin: 0 auto;
+    padding: 28px 18px 60px;
   }
-  h1 {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--text-bright);
-    margin-bottom: 6px;
+  .hero, .section, .footer {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 32px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
   }
-  .subtitle {
-    color: var(--text-dim);
-    font-size: 14px;
-    margin-bottom: 32px;
-  }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    transition: border-color 0.2s;
-  }
-  .card:hover { border-color: var(--accent); }
-  .card-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
-  }
-  .card-value {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--text-bright);
-  }
-  .card-value .unit { font-size: 16px; color: var(--text-dim); font-weight: 500; }
-  .card-note { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
-  h2 {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text-bright);
-    margin: 32px 0 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-  h3 {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--accent);
-    margin: 20px 0 10px;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
+  .hero {
+    padding: 30px;
     margin-bottom: 20px;
   }
-  th {
-    text-align: left;
-    padding: 10px 12px;
-    background: var(--surface2);
-    color: var(--text-dim);
-    font-weight: 600;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    border-bottom: 1px solid var(--border);
-  }
-  td {
-    padding: 9px 12px;
-    border-bottom: 1px solid var(--border);
-    color: var(--text);
-  }
-  tr:hover td { background: rgba(116,143,252,0.04); }
   .badge {
     display: inline-block;
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-  }
-  .badge-active { background: rgba(105,219,124,0.15); color: var(--green); }
-  .badge-review { background: rgba(255,212,59,0.15); color: var(--yellow); }
-  .badge-frozen { background: rgba(116,143,252,0.15); color: var(--accent); }
-  .badge-archive { background: rgba(255,146,43,0.15); color: var(--orange); }
-  .badge-delete { background: rgba(255,107,107,0.15); color: var(--red); }
-  .badge-keep { background: rgba(56,217,169,0.15); color: var(--teal); }
-  .section-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-  .decision-box {
-    background: var(--surface);
-    border: 1px solid var(--accent);
-    border-left: 4px solid var(--accent);
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    margin-bottom: 12px;
-  }
-  .decision-box .label {
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: rgba(48, 74, 109, 0.08);
+    color: var(--blue);
     font-size: 12px;
-    font-weight: 600;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .decision-box .value {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-bright);
-    margin-top: 4px;
-    font-family: 'Courier New', monospace;
-  }
-  .decision-box .note { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
-  .progress-bar {
-    height: 8px;
-    border-radius: 4px;
-    background: var(--surface2);
-    overflow: hidden;
-    margin-top: 8px;
-  }
-  .progress-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.6s ease;
-  }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
-  .cleanup-summary {
-    display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
-  }
-  .cleanup-stat { text-align: center; }
-  .cleanup-stat .num { font-size: 28px; font-weight: 700; }
-  .cleanup-stat .label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
-  .rule-list { list-style: none; padding: 0; }
-  .rule-list li {
-    padding: 6px 0;
-    font-size: 13px;
-    color: var(--text);
-  }
-  .rule-list li::before {
-    content: '//';
-    color: var(--red);
     font-weight: 700;
-    margin-right: 8px;
+    margin: 0 8px 8px 0;
   }
-  .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .tag {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    background: var(--surface2);
-    color: var(--text-dim);
-    border: 1px solid var(--border);
+  h1 {
+    margin: 8px 0 10px;
+    font-size: clamp(34px, 7vw, 60px);
+    line-height: 1.08;
   }
-  footer {
-    text-align: center;
-    color: var(--text-dim);
+  h2 {
+    margin: 0 0 14px;
+    font-size: clamp(24px, 4vw, 34px);
+    line-height: 1.2;
+  }
+  h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    line-height: 1.3;
+  }
+  p {
+    margin: 0;
+    line-height: 1.85;
+    color: var(--text-soft);
+  }
+  .en {
+    display: block;
+    margin-top: 7px;
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--text-faint);
+  }
+  .section {
+    padding: 26px;
+    margin-top: 18px;
+  }
+  .subtle {
+    font-family: "IBM Plex Mono", monospace;
     font-size: 12px;
-    margin-top: 48px;
-    padding: 16px 0;
-    border-top: 1px solid var(--border);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+  .grid {
+    display: grid;
+    gap: 14px;
+  }
+  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .card {
+    background: var(--panel-strong);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 18px;
+  }
+  .stat {
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1;
+    margin: 10px 0 8px;
+  }
+  .kicker {
+    font-size: 12px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .path {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--text-faint);
+    word-break: break-word;
+  }
+  .accent-pro {
+    border-left: 6px solid var(--red);
+  }
+  .accent-plain {
+    border-left: 6px solid var(--green);
+  }
+  .accent-safe {
+    border-left: 6px solid var(--gold);
+  }
+  ul {
+    margin: 12px 0 0;
+    padding-left: 18px;
+    color: var(--text-soft);
+    line-height: 1.85;
+  }
+  li + li { margin-top: 8px; }
+  .footer {
+    margin-top: 18px;
+    padding: 18px 22px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-faint);
+  }
+  @media (max-width: 900px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .hero, .section { padding: 22px; }
   }
 </style>
 </head>
 <body>
+  <main class="page">
+    <section class="hero">
+      <span class="badge">中文主读 / Chinese-first</span>
+      <span class="badge">低刺激配色 / Soft reading</span>
+      <span class="badge">双层解释 / Pro + Plain</span>
+      <h1>本机记忆治理<br>Local Memory Governance</h1>
+      <p>这不是“先删再说”的清理页面，而是一份先判清主工作区、主 Vault、主记忆系统，再决定哪些能动、哪些不能动的治理总览。</p>
+      <span class="en">This is not a delete-first cleanup page. It is a governance brief that clarifies the live workspace, vault, and memory system before deciding what can or cannot be touched.</span>
+    </section>
 
-<h1>Local Memory Governance</h1>
-<p class="subtitle">2026-03-28 -- Disk scan, classification & cleanup dashboard</p>
+    <section class="section">
+      <div class="subtle">Snapshot</div>
+      <h2>先用 30 秒看懂这项目</h2>
+      <span class="en">A 30-second summary of the current governance state.</span>
+      <div class="grid grid-4" style="margin-top:16px;">
+        <article class="card">
+          <div class="kicker">Scanned Capacity</div>
+          <div class="stat">5.4TB</div>
+          <p>这轮先扫了 4 个磁盘，不是先清，而是先看清。</p>
+          <span class="en">Four drives were scanned first so the overall picture was understood before cleanup.</span>
+        </article>
+        <article class="card">
+          <div class="kicker">Overlapping Workspaces</div>
+          <div class="stat">7</div>
+          <p>至少 7 个“像工作区”的地方互相重叠，现在已经判清角色。</p>
+          <span class="en">At least seven workspace-like locations overlap and now have explicit roles.</span>
+        </article>
+        <article class="card">
+          <div class="kicker">Loose HOME Files</div>
+          <div class="stat">137+</div>
+          <p>HOME 根目录散落文件很多，研究资料、脚本和临时输出混着放。</p>
+          <span class="en">The HOME root contains many loose files mixing research, scripts, and temporary outputs.</span>
+        </article>
+        <article class="card">
+          <div class="kicker">Safe Cleanup Batch 1</div>
+          <div class="stat">948MB</div>
+          <p>第一批超保守清理已经完成，只动了确定无用的低风险内容。</p>
+          <span class="en">The first conservative cleanup batch already removed only low-risk, clearly useless items.</span>
+        </article>
+      </div>
+    </section>
 
-<!-- ====== KPI Cards ====== -->
-<div class="grid">
-  <div class="card">
-    <div class="card-title">Total Disk</div>
-    <div class="card-value">5.4 <span class="unit">TB</span></div>
-    <div class="card-note">C: 650 GB / D: 3.2 TB / E: 954 GB / G: 650 GB</div>
-  </div>
-  <div class="card">
-    <div class="card-title">Batch 1 Cleaned</div>
-    <div class="card-value" style="color:var(--green)">948 <span class="unit">MB</span></div>
-    <div class="card-note">23 items deleted, 0 failures</div>
-  </div>
-  <div class="card">
-    <div class="card-title">HOME Scattered Files</div>
-    <div class="card-value" style="color:var(--orange)">137</div>
-    <div class="card-note">classified into 9 categories</div>
-  </div>
-  <div class="card">
-    <div class="card-title">Overlapping Workspaces</div>
-    <div class="card-value" style="color:var(--yellow)">7</div>
-    <div class="card-note">1 active, 1 frozen, 5 archive candidates</div>
-  </div>
-</div>
+    <section class="section">
+      <div class="subtle">Two Ways To Read</div>
+      <h2>专业版和大白话版怎么理解这项目</h2>
+      <span class="en">Two reading layers: professional framing and plain-speak framing.</span>
+      <div class="grid grid-2" style="margin-top:16px;">
+        <article class="card accent-pro">
+          <h3>专业版 / Professional</h3>
+          <p>这是一个“本机资产治理 + 决策固化”项目。重点不是立刻删盘，而是先把工作区、Vault、记忆系统、散落脚本和临时残骸完成分类、定性和定案，再降低后续整理时的误删风险。</p>
+          <span class="en">This is a local asset governance and decision-hardening project. Its goal is to classify and formalize the roles of workspaces, vaults, memory systems, scripts, and temporary leftovers before any major cleanup.</span>
+        </article>
+        <article class="card accent-plain">
+          <h3>大白话版 / Plain-Speak</h3>
+          <p>这不是“先把屋里东西都扔一遍”的活，而是先搞清楚哪个房间还在住人、哪个是旧仓库、哪些东西一扔就要出事。地图画清楚了，后面收拾才不容易翻车。</p>
+          <span class="en">This is not a “throw things away first” job. It first identifies which rooms are still lived in, which ones are just storage, and which items would cause trouble if removed too early.</span>
+        </article>
+      </div>
+    </section>
 
-<!-- ====== Decisions ====== -->
-<h2>Decisions (Written & Final)</h2>
+    <section class="section">
+      <div class="subtle">Project Folder</div>
+      <h2>你现在这个项目文件夹怎么读</h2>
+      <span class="en">How to read the current project folder and what each area is for.</span>
+      <div class="grid grid-2" style="margin-top:16px;">
+        <article class="card">
+          <h3>00_now / 当前目标</h3>
+          <div class="path">./00_now/CURRENT_OBJECTIVE.md</div>
+          <p>写清这一轮要回答什么，以及这一轮故意不做什么。</p>
+          <span class="en">Defines what this round must answer and what is intentionally out of scope.</span>
+        </article>
+        <article class="card">
+          <h3>01_requests / 原始任务</h3>
+          <div class="path">./01_requests/FOR_OPUS_SCAN.md</div>
+          <p>保留最原始的扫描要求，防止后面忘了“当时到底让 AI 干什么”。</p>
+          <span class="en">Stores the original scanning request so the initial scope stays auditable.</span>
+        </article>
+        <article class="card">
+          <h3>02_reports / 扫描报告</h3>
+          <div class="path">./02_reports/*.md</div>
+          <p>这里放“查出来了什么”，包括工作区地图、HOME 分类、桌面分类和清理结果。</p>
+          <span class="en">This is the evidence layer: workspace map, HOME classification, desktop classification, and cleanup results.</span>
+        </article>
+        <article class="card">
+          <h3>03_registry / 正式判决</h3>
+          <div class="path">./03_registry/*.md / *.csv</div>
+          <p>这里放已经写死的结论，不再停留在“可能、也许、建议”。</p>
+          <span class="en">This is where hardened rulings live instead of fuzzy “maybe” guidance.</span>
+        </article>
+        <article class="card">
+          <h3>04_handoff / 交接层</h3>
+          <div class="path">./04_handoff/FOR_CHATGPT.md</div>
+          <p>给下一个 AI 或下一个线程看的压缩版总结，适合快速续上文。</p>
+          <span class="en">A compressed handoff layer for the next model or next thread.</span>
+        </article>
+        <article class="card">
+          <h3>05_templates / 模板层</h3>
+          <div class="path">./05_templates/*</div>
+          <p>把未来还会复用的格式单独抽出来，避免下次再从零组织。</p>
+          <span class="en">Reusable templates are isolated here so similar future projects can start faster.</span>
+        </article>
+      </div>
+    </section>
 
-<div class="two-col">
-  <div>
-    <div class="decision-box">
-      <div class="label">Primary Workspace</div>
-      <div class="value">D:\AgentTeam-Workspace</div>
-      <div class="note">64 subdirs, ~87 GB, all new projects go here</div>
+    <section class="section">
+      <div class="subtle">Locked Rulings</div>
+      <h2>现在已经定案的 4 个硬结论</h2>
+      <span class="en">The four rulings that should be treated as current truth.</span>
+      <div class="grid grid-2" style="margin-top:16px;">
+        <article class="card accent-safe">
+          <h3>唯一现役主工作区</h3>
+          <div class="path">D:\AgentTeam-Workspace</div>
+          <p>所有新项目、新任务、新实验默认都应该发生在这里。</p>
+          <span class="en">All new projects, tasks, and experiments should default to this workspace.</span>
+        </article>
+        <article class="card accent-safe">
+          <h3>唯一现役核心项目区</h3>
+          <div class="path">D:\AgentTeam-Workspace\Dev</div>
+          <p>正式项目入口锁定为 Dev，它是当前最清晰、最该保护的核心层。</p>
+          <span class="en">`Dev` is the official project entry point and the clearest live core layer.</span>
+        </article>
+        <article class="card accent-safe">
+          <h3>主记忆系统</h3>
+          <div class="path">C:\Users\Administrator\memory-v2</div>
+          <p>未来新的语义记忆继续写进这里，其他四套记忆系统都冻结。</p>
+          <span class="en">Future semantic memory should continue here; the other memory systems are frozen.</span>
+        </article>
+        <article class="card accent-safe">
+          <h3>主 Vault</h3>
+          <div class="path">C:\Users\Administrator\iCloudDrive\iCloud~md~obsidian</div>
+          <p>iCloud 同步的 Obsidian Vault 是现役活库，旧 Vault 只是冻结副本。</p>
+          <span class="en">The iCloud-synced Obsidian vault is the live vault; the older vault is now a frozen copy.</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="subtle">Chaos Sources</div>
+      <h2>现在最乱的 3 个地方</h2>
+      <span class="en">The three biggest chaos zones creating confusion right now.</span>
+      <div class="grid grid-3" style="margin-top:16px;">
+        <article class="card">
+          <h3>HOME 根目录</h3>
+          <p>研究资料、脚本、HTML、JSON、XML、APK 和临时目录全往根目录丢，系统配置和杂物混在一起。</p>
+          <span class="en">Research files, scripts, HTML, JSON, XML, APK files, and temp folders all pile into HOME root.</span>
+        </article>
+        <article class="card">
+          <h3>AgentTeam-Workspace 一级目录</h3>
+          <p>正式项目、日期任务、独立工具、旧记忆系统和基础设施目录全都平铺在一级。</p>
+          <span class="en">Core projects, dated tasks, standalone tools, old memory systems, and infra folders all share the same top level.</span>
+        </article>
+        <article class="card">
+          <h3>桌面</h3>
+          <p>桌面除了快捷方式，还混着安装包、解压残留、修改器和文档，所以一眼看过去很吵。</p>
+          <span class="en">The desktop mixes shortcuts with installers, extracted leftovers, trainers, and documents.</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="subtle">Boundaries</div>
+      <h2>哪些绝对别碰，哪些可以放心动</h2>
+      <span class="en">What must stay protected, and what is already safe to touch.</span>
+      <div class="grid grid-2" style="margin-top:16px;">
+        <article class="card accent-pro">
+          <h3>现在绝对不要动</h3>
+          <ul>
+            <li><strong>Dev 核心项目区</strong>：<span class="path">D:\AgentTeam-Workspace\Dev</span></li>
+            <li><strong>主 Vault 和 iCloud 同步目录</strong>：先保命，不乱迁。</li>
+            <li><strong>主记忆系统</strong>：<span class="path">C:\Users\Administrator\memory-v2</span></li>
+            <li><strong>大体量候审目录</strong>：<span class="path">opencode / my_projects / new idea</span></li>
+          </ul>
+          <span class="en">These are live or high-risk assets and should not be touched casually.</span>
+        </article>
+        <article class="card accent-plain">
+          <h3>已经验证可以安全动</h3>
+          <ul>
+            <li><strong>重复安装包</strong>：第一批已成功删掉 3 个。</li>
+            <li><strong>旧日志</strong>：调试日志和临时输出属于低风险清理目标。</li>
+            <li><strong>空壳 sqlite_mcp_server.db</strong>：0 byte 自动生成残骸，已验证可删。</li>
+            <li><strong>Downloads 的已装重复件</strong>：最适合继续做下一批。</li>
+          </ul>
+          <span class="en">Duplicate installers, old logs, empty shell DBs, and repeated downloads remain safe cleanup targets.</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="subtle">Recommended Sequence</div>
+      <h2>后面最顺的动作顺序</h2>
+      <span class="en">The most stable next sequence based on the current findings.</span>
+      <div class="grid grid-2" style="margin-top:16px;">
+        <article class="card">
+          <h3>1. 继续做第二批安全清理</h3>
+          <p>优先盯住 Downloads、桌面安装包、旧日志和已验证的临时残骸。</p>
+          <span class="en">Continue with low-risk cleanup targets such as Downloads, desktop installers, and old logs.</span>
+        </article>
+        <article class="card">
+          <h3>2. 把 HOME 根目录里的研究资料和脚本分家</h3>
+          <p>飞书研究、视频自动化研究、工具脚本和临时脚本，不该继续堆在 HOME 根目录。</p>
+          <span class="en">Split loose research files and scripts out of HOME root into notes, tools, or archive destinations.</span>
+        </article>
+        <article class="card">
+          <h3>3. 给 AgentTeam-Workspace 增加内部层级</h3>
+          <p>先规划“正式项目 / 一次性任务 / 冻结项目 / archive”，不要一上来大搬家。</p>
+          <span class="en">Define clearer internal tiers before attempting any large reorganization.</span>
+        </article>
+        <article class="card">
+          <h3>4. 最后再审大体量冻结目录</h3>
+          <p>像 <span class="path">opencode</span>、<span class="path">my_projects</span>、<span class="path">local-mem-v2</span> 这种大目录，要逐个审，不要一锅端。</p>
+          <span class="en">Audit large frozen directories one by one instead of touching them too early.</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="subtle">Evidence</div>
+      <h2>这页主要参考了哪些文件</h2>
+      <span class="en">The main project files used as evidence for this page.</span>
+      <div class="grid grid-2" style="margin-top:16px;">
+        <article class="card">
+          <h3>目标和原始输入</h3>
+          <ul>
+            <li><a href="./README_FIRST.md">README_FIRST.md</a></li>
+            <li><a href="./00_now/CURRENT_OBJECTIVE.md">00_now/CURRENT_OBJECTIVE.md</a></li>
+            <li><a href="./01_requests/FOR_OPUS_SCAN.md">01_requests/FOR_OPUS_SCAN.md</a></li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>报告和正式判决</h3>
+          <ul>
+            <li><a href="./02_reports/WORKSPACE_MAP.md">02_reports/WORKSPACE_MAP.md</a></li>
+            <li><a href="./02_reports/SAFE_CLEANUP_PLAN.md">02_reports/SAFE_CLEANUP_PLAN.md</a></li>
+            <li><a href="./02_reports/CLEANUP_EXECUTION_BATCH1.md">02_reports/CLEANUP_EXECUTION_BATCH1.md</a></li>
+            <li><a href="./02_reports/HOME_ROOT_CLASSIFICATION.md">02_reports/HOME_ROOT_CLASSIFICATION.md</a></li>
+            <li><a href="./02_reports/DESKTOP_CLASSIFICATION.md">02_reports/DESKTOP_CLASSIFICATION.md</a></li>
+            <li><a href="./03_registry/WORKSPACE_DECISION.md">03_registry/WORKSPACE_DECISION.md</a></li>
+            <li><a href="./03_registry/PRIMARY_MEMORY_SYSTEM_DECISION.md">03_registry/PRIMARY_MEMORY_SYSTEM_DECISION.md</a></li>
+            <li><a href="./03_registry/PRIMARY_VAULT_DECISION.md">03_registry/PRIMARY_VAULT_DECISION.md</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <div class="footer">
+      这页会保持中文优先、英文辅助、配色柔和、信息成块，方便你长时间阅读而不刺眼。<br>
+      English support stays secondary so the page remains comfortable for Chinese-first reading.
     </div>
-    <div class="decision-box">
-      <div class="label">Core Project Area</div>
-      <div class="value">D:\AgentTeam-Workspace\Dev</div>
-      <div class="note">9 subdirs: personnal research, Learning, sandbox, etc.</div>
-    </div>
-  </div>
-  <div>
-    <div class="decision-box">
-      <div class="label">Primary Vault</div>
-      <div class="value">iCloudDrive\iCloud~md~obsidian</div>
-      <div class="note">iCloud sync, has .git, cross-device active vault</div>
-    </div>
-    <div class="decision-box">
-      <div class="label">Primary Memory System</div>
-      <div class="value">C:\Users\Administrator\memory-v2</div>
-      <div class="note">0.1 MB, 23 files, lightweight semantic memory</div>
-    </div>
-  </div>
-</div>
-
-<!-- ====== Rules ====== -->
-<div class="section-card" style="margin-top:16px">
-  <h3 style="margin-top:0">Forbidden Actions</h3>
-  <ul class="rule-list">
-    <li>Do NOT delete Dev</li>
-    <li>Do NOT delete Obsidian Vault</li>
-    <li>Do NOT migrate the primary workspace elsewhere</li>
-    <li>Do NOT create a new workspace on another drive</li>
-    <li>Do NOT delete opencode / my_projects / new idea without audit</li>
-  </ul>
-</div>
-
-<!-- ====== Workspace Map ====== -->
-<h2>Workspace Status Map</h2>
-<div class="section-card">
-<table>
-  <thead><tr><th>Workspace</th><th>Status</th><th>Size</th><th>Note</th></tr></thead>
-  <tbody>
-    <tr><td><strong>D:\AgentTeam-Workspace</strong></td><td><span class="badge badge-active">Active</span></td><td>~87 GB</td><td>Primary, 64 subdirs</td></tr>
-    <tr><td>&nbsp;&nbsp;/Dev</td><td><span class="badge badge-active">Active Core</span></td><td>~10 GB</td><td>9 organized subdirs</td></tr>
-    <tr><td>D:\Projects</td><td><span class="badge badge-frozen">Frozen</span></td><td>14 dirs</td><td>Old workspace, has ObsidianVault</td></tr>
-    <tr><td>D:\Workspace</td><td><span class="badge badge-archive">Archive</span></td><td>tiny</td><td>Abandoned migration</td></tr>
-    <tr><td>D:\Workspace-ing</td><td><span class="badge badge-archive">Archive</span></td><td>tiny</td><td>Abandoned migration</td></tr>
-    <tr><td>~\Projects</td><td><span class="badge badge-archive">Archive</span></td><td>tiny</td><td>HOME Projects, 2 dirs</td></tr>
-    <tr><td>~\codex-work</td><td><span class="badge badge-review">Review</span></td><td>?</td><td>Check if Codex still uses this</td></tr>
-    <tr><td>~\global-project-hub</td><td><span class="badge badge-archive">Archive</span></td><td>?</td><td>Project hub attempt</td></tr>
-  </tbody>
-</table>
-</div>
-
-<!-- ====== AgentTeam Classification ====== -->
-<h2>AgentTeam-Workspace Breakdown</h2>
-<div class="section-card">
-<table>
-  <thead><tr><th>Layer</th><th>Count</th><th>Status</th><th>Next Step</th></tr></thead>
-  <tbody>
-    <tr><td>Tier 1: Core projects (Dev/)</td><td>9 + 1</td><td><span class="badge badge-active">Active</span></td><td>Keep as-is</td></tr>
-    <tr><td>Tier 2: One-off tasks (2026-03-xx_*)</td><td>~22</td><td><span class="badge badge-frozen">Frozen</span></td><td>Future: move to _archive/</td></tr>
-    <tr><td>Tier 3: Standalone tools</td><td>~11</td><td><span class="badge badge-frozen">Frozen</span></td><td>Confirm, then Dev/tools or _archive/</td></tr>
-    <tr><td>Tier 4: Large frozen dirs</td><td>8</td><td><span class="badge badge-frozen">Frozen</span></td><td>Audit one-by-one</td></tr>
-    <tr><td>Tier 5: Infra / misc</td><td>~15</td><td><span class="badge badge-review">Mixed</span></td><td>Mixed handling</td></tr>
-  </tbody>
-</table>
-
-<h3>Top 5 by Size (Frozen, need audit)</h3>
-<table>
-  <thead><tr><th>Directory</th><th>Size</th><th>Last Modified</th></tr></thead>
-  <tbody>
-    <tr><td>opencode</td><td>29.7 GB</td><td>2026-02-14</td></tr>
-    <tr><td>my_projects</td><td>16.8 GB</td><td>2026-01-19</td></tr>
-    <tr><td>new idea</td><td>13.0 GB</td><td>2026-03-25</td></tr>
-    <tr><td>happy-ddz</td><td>3.7 GB</td><td>2026-03-05</td></tr>
-    <tr><td>local-mem-v2</td><td>2.8 GB</td><td>2026-02-20</td></tr>
-  </tbody>
-</table>
-</div>
-
-<!-- ====== HOME Classification ====== -->
-<h2>HOME Root Classification (~137 scattered files)</h2>
-<div class="section-card">
-<table>
-  <thead><tr><th>Category</th><th>Count</th><th>Status</th><th>Destination</th></tr></thead>
-  <tbody>
-    <tr><td>Feishu Research (.md)</td><td>20</td><td><span class="badge badge-frozen">Frozen</span></td><td>Archive or Dev/notes</td></tr>
-    <tr><td>Video Automation Research (.md)</td><td>19</td><td><span class="badge badge-frozen">Frozen</span></td><td>Archive or Dev/notes</td></tr>
-    <tr><td>System Config</td><td>~10</td><td><span class="badge badge-active">Active</span></td><td><strong>Keep in HOME</strong></td></tr>
-    <tr><td>Active Tool Scripts</td><td>~10</td><td><span class="badge badge-review">Review</span></td><td>scripts/ or Dev/tools</td></tr>
-    <tr><td>One-off Scripts</td><td>~14</td><td><span class="badge badge-archive">Archive</span></td><td>Archive</td></tr>
-    <tr><td>Debug Output / Data</td><td>~11</td><td><span class="badge badge-archive">Archive</span></td><td>Archive</td></tr>
-    <tr><td>Large Temp Files</td><td>~25</td><td><span class="badge badge-archive">Archive</span></td><td>Archive or delete</td></tr>
-    <tr><td>Deletable Junk</td><td>~25</td><td><span class="badge badge-delete">Delete</span></td><td>Next cleanup batch</td></tr>
-    <tr><td>Personal Content</td><td>~3</td><td><span class="badge badge-review">Review</span></td><td>Content system (01~05)</td></tr>
-  </tbody>
-</table>
-</div>
-
-<!-- ====== Desktop Classification ====== -->
-<h2>Desktop Classification (142 files)</h2>
-<div class="section-card">
-<table>
-  <thead><tr><th>Category</th><th>Count</th><th>Action</th></tr></thead>
-  <tbody>
-    <tr><td>Shortcuts (legit use)</td><td>~75</td><td><span class="badge badge-keep">Keep</span></td></tr>
-    <tr><td>Installers</td><td>2</td><td><span class="badge badge-archive">Move out</span> (~286 MB)</td></tr>
-    <tr><td>Extracted remnants</td><td>3 dirs</td><td><span class="badge badge-archive">Move out</span></td></tr>
-    <tr><td>Game trainers</td><td>~8</td><td><span class="badge badge-review">Review</span></td></tr>
-    <tr><td>Documents</td><td>4</td><td><span class="badge badge-archive">Relocate</span></td></tr>
-    <tr><td>Deletable junk</td><td>~7</td><td><span class="badge badge-delete">Next batch</span></td></tr>
-  </tbody>
-</table>
-</div>
-
-<!-- ====== Cleanup Report ====== -->
-<h2>Batch 1 Cleanup Results</h2>
-<div class="section-card">
-  <div class="cleanup-summary">
-    <div class="cleanup-stat">
-      <div class="num" style="color:var(--green)">23</div>
-      <div class="label">Items deleted</div>
-    </div>
-    <div class="cleanup-stat">
-      <div class="num" style="color:var(--green)">948</div>
-      <div class="label">MB freed</div>
-    </div>
-    <div class="cleanup-stat">
-      <div class="num" style="color:var(--green)">0</div>
-      <div class="label">Failures</div>
-    </div>
-    <div class="cleanup-stat">
-      <div class="num" style="color:var(--yellow)">10</div>
-      <div class="label">Skipped (non-empty)</div>
-    </div>
-  </div>
-
-  <h3>What was deleted</h3>
-  <table>
-    <thead><tr><th>Category</th><th>Count</th><th>Freed</th></tr></thead>
-    <tbody>
-      <tr><td>Duplicate installers (BaiduNetdisk / GoogleDrive / Antigravity)</td><td>3</td><td>938.6 MB</td></tr>
-      <tr><td>Old logs (gmn-proxy / codex-watchdog / claude-debug / etc.)</td><td>7</td><td>9.7 MB</td></tr>
-      <tr><td>sqlite_mcp_server.db (all 0 bytes, verified)</td><td>11</td><td>0 MB</td></tr>
-      <tr><td>Empty directories</td><td>2</td><td>0 MB</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- ====== Memory Systems ====== -->
-<h2>Memory & Vault Systems</h2>
-<div class="two-col">
-  <div class="section-card">
-    <h3 style="margin-top:0">Memory Systems</h3>
-    <table>
-      <thead><tr><th>System</th><th>Size</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td><strong>memory-v2</strong></td><td>0.1 MB</td><td><span class="badge badge-active">Primary</span></td></tr>
-        <tr><td>.local-mem</td><td>4.3 GB</td><td><span class="badge badge-frozen">Frozen</span></td></tr>
-        <tr><td>.local-mem-dev</td><td>147 MB</td><td><span class="badge badge-frozen">Frozen</span></td></tr>
-        <tr><td>local-mem-v2</td><td>2.8 GB</td><td><span class="badge badge-frozen">Frozen</span></td></tr>
-        <tr><td>local-mem</td><td>0.8 MB</td><td><span class="badge badge-archive">Archive</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="section-card">
-    <h3 style="margin-top:0">Obsidian Vaults</h3>
-    <table>
-      <thead><tr><th>Vault</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td><strong>iCloud~md~obsidian</strong></td><td><span class="badge badge-active">Primary</span></td></tr>
-        <tr><td>D:\Projects\ObsidianVault</td><td><span class="badge badge-frozen">Frozen copy</span></td></tr>
-        <tr><td>backups\obsidian-vault-old</td><td><span class="badge badge-frozen">Backup</span></td></tr>
-        <tr><td>.obsidian-backup-*</td><td><span class="badge badge-frozen">Backup (x3)</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ====== Next Steps ====== -->
-<h2>Suggested Next Steps</h2>
-<div class="section-card">
-  <table>
-    <thead><tr><th>#</th><th>Action</th><th>Impact</th><th>Risk</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>Batch 2 cleanup: Downloads old installers (~2.5 GB)</td><td style="color:var(--green)">High</td><td style="color:var(--green)">Low</td></tr>
-      <tr><td>2</td><td>Move HOME Feishu .md files (20) to Archive</td><td style="color:var(--teal)">Medium</td><td style="color:var(--green)">Low</td></tr>
-      <tr><td>3</td><td>Move HOME video-automation .md files (19) to Archive</td><td style="color:var(--teal)">Medium</td><td style="color:var(--green)">Low</td></tr>
-      <tr><td>4</td><td>Move Desktop installers & v2rayN to D:\software</td><td style="color:var(--teal)">Medium</td><td style="color:var(--green)">Low</td></tr>
-      <tr><td>5</td><td>Audit opencode (29.7 GB) contents</td><td style="color:var(--green)">High</td><td style="color:var(--yellow)">Medium</td></tr>
-      <tr><td>6</td><td>Create _archive/ in AgentTeam-Workspace for frozen tasks</td><td style="color:var(--teal)">Medium</td><td style="color:var(--green)">Low</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<footer>
-  local-memory-governance &middot; generated 2026-03-28 &middot; <a href="https://github.com/ugfxvhhcxvxsgvvjjvx5-web/local-memory-governance" style="color:var(--accent);text-decoration:none">GitHub</a>
-</footer>
-
+  </main>
 </body>
 </html>

@@ -232,3 +232,43 @@
 ### 当前状态
 
 * 已解决 — 通过 PRIMARY_VAULT_DECISION.md 正式判决
+
+---
+
+## 7. 高风险运行资产被当普通文件归位
+
+### 典型表现
+
+* 把 exe / 解压目录 / 便携软件 / 配置文件按 DROP_RULES 归位到 D:\software 或 Archive
+* 移动后快捷方式失效、代理断裂、脚本找不到文件
+* 风灵月影修改器移走后游戏启动后报错
+* gmn-proxy.mjs 移走后代理不工作
+
+### 常见触发条件
+
+* AI 把 exe 等同于普通文件，套用 DROP_RULES 的归位逻辑
+* 没有检查是否有快捷方式指向该路径
+* 没有检查是否有脚本硬编码该路径
+* 没有检查旁边是否有 dll / config / data 等伴随文件
+
+### 已出现位置
+
+* 在 SAFE_CLEANUP_PLAN.md 和 DESKTOP_CLASSIFICATION.md 中，曾将桌面 exe / 解压目录列入"应移出桌面"
+* DROP_RULES.md 中曾写"安装包默认落到 D:\software\"
+* 用户在 Round 7 纠偏，指出这些是高风险运行资产
+
+### 已知解决方式
+
+* 创建 HIGH_RISK_NO_MOVE_RULES.md，优先级高于 DROP_RULES
+* 高风险资产在未审计前一律：不移动、不删除、不归档、不改名
+* 创建 HIGH_RISK_ASSET_REGISTRY.csv 盘点全部高风险对象
+
+### 规避规则
+
+* 遇到 exe / 解压目录 / 配置 / 脚本 / dll，先查 HIGH_RISK_NO_MOVE_RULES.md
+* 移动前必须回答 5 个问题：安装器还是运行体？单文件还是目录依赖？旁边有伴随文件吗？有快捷方式指向吗？像便携软件/修改器/启动器吗？
+* 回答不了就标候审，不要动
+
+### 当前状态
+
+* 已解决 — 通过 HIGH_RISK_NO_MOVE_RULES.md 正式纠偏

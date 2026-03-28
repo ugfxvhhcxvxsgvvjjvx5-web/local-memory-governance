@@ -143,3 +143,32 @@
 - `04_handoff\HANDOFF_NEXT_AI.md`（覆盖更新）
 - `04_handoff\EXECUTION_LOG.md`（追加）
 - `04_handoff\ERROR_LOG.md`（追加）
+
+---
+
+## 2026-03-28 Round 7 — 高风险运行资产纠偏
+
+**执行者**：Antigravity (Gemini)
+**时间**：2026-03-28 20:13
+
+### 做了什么
+
+1. 纠偏：停止之前"把 exe / 解压目录 / 工具归位"的思路
+2. 扫描桌面/Downloads/HOME根/D根 的全部高风险可执行资产
+3. 创建 HIGH_RISK_NO_MOVE_RULES.md（优先级高于 DROP_RULES）
+4. 创建 HIGH_RISK_ASSET_REGISTRY.csv（51 条高风险资产，含风险等级和依赖分析）
+5. 创建 DESKTOP_HIGH_RISK_ASSETS.md（7 个桌面高风险对象详细报告）
+6. 创建 EXECUTABLE_DEPENDENCY_RISK.md（7 种依赖风险用人话解释）
+7. 覆盖更新 HANDOFF_NEXT_AI.md（含纠偏声明）
+8. 新增错误模式 #7（高风险资产误归位）到 ERROR_PATTERNS.md
+9. 推送到 GitHub
+
+### 产出文件
+- `03_registry\HIGH_RISK_NO_MOVE_RULES.md`（新建）
+- `03_registry\HIGH_RISK_ASSET_REGISTRY.csv`（新建）
+- `02_reports\DESKTOP_HIGH_RISK_ASSETS.md`（新建）
+- `02_reports\EXECUTABLE_DEPENDENCY_RISK.md`（新建）
+- `04_handoff\HANDOFF_NEXT_AI.md`（覆盖更新）
+- `04_handoff\EXECUTION_LOG.md`（追加）
+- `04_handoff\ERROR_LOG.md`（追加）
+- `03_registry\ERROR_PATTERNS.md`（追加新模式）

@@ -1,0 +1,52 @@
+name,path,kind,location_type,has_shortcuts,has_neighbor_files,risk_level,reason,status,next_action,notes
+v2rayN-windows-64,C:\Users\Administrator\Desktop\v2rayN-windows-64,extracted-app-dir,Desktop,unknown,yes,very_high,便携软件完整运行目录(354MB) 内含嵌套子目录 移动=失效,现役,不动,可能被桌面快捷方式引用
+注册机,C:\Users\Administrator\Desktop\注册机,tool-dir,Desktop,unknown,yes,high,注册工具目录(0.7MB) 内含4个文件,候审,先审计,确认内容后决定
+Maestro-Setup-0.14.5.exe,C:\Users\Administrator\Desktop\Maestro-Setup-0.14.5.exe,exe-installer,Desktop,no,no,high,安装器单文件(137MB) 但需确认是否已安装,候审,确认依赖,确认 Maestro 已安装后可删
+v2rayN-windows-64.zip,C:\Users\Administrator\Desktop\v2rayN-windows-64.zip,zip-archive,Desktop,no,no,high,已解压原包(136MB) 但删前需确认解压目录完整,候审,确认依赖,确认解压目录完整后可删
+Resident Evil 2 Trainer,C:\Users\Administrator\Desktop\Resident Evil 2 v1.0-v20220613 Plus 20 Trainer.exe,trainer-exe,Desktop,no,no,high,游戏修改器单文件(1.3MB) 可能与游戏路径绑定,候审,先审计,确认是否还玩此游戏
+先开插件再开第五.exe,C:\Users\Administrator\Desktop\先开插件再开第五务必这样操作.exe,game-helper-exe,Desktop,no,no,very_high,游戏辅助(122MB) 单文件但体积大 来源不明,候审,先审计,第五人格辅助 确认是否还玩
+desktop.ini,C:\Users\Administrator\Desktop\desktop.ini,config,Desktop,no,no,high,系统配置文件,现役,不动,系统文件
+Crimson Desert Trainer,E:\download\FLiNGTrainer,trainer-dir,Other,yes,yes,very_high,风灵月影修改器主目录 桌面快捷方式指向此处,候审,不动,桌面有2个快捷方式指向此目录
+activitywatch,C:\Users\Administrator\Downloads\activitywatch,extracted-app-dir,Downloads,unknown,yes,very_high,活动监控软件完整运行目录(275MB 72个文件),候审,先审计,确认是否在使用
+activitywatch-zip-extracted,C:\Users\Administrator\Downloads\activitywatch-v0.13.2-windows-x86_64,extracted-app-dir,Downloads,unknown,yes,very_high,解压后目录 可能是上面的重复,候审,先审计,与activitywatch目录对比
+oh-my-opencode,C:\Users\Administrator\Downloads\oh-my-opencode-3.0.0-beta.13,extracted-app-dir,Downloads,unknown,yes,high,OpenCode 扩展包(197MB 27个文件),候审,先审计,确认是否已安装
+claude_code_bridge,C:\Users\Administrator\Downloads\claude_code_bridge,project-dir,Downloads,unknown,yes,high,代码桥项目(34MB 24个文件),候审,先审计,确认是否还在用
+lark-stage,C:\Users\Administrator\Downloads\lark-stage-20260310-1200,extracted-app-dir,Downloads,unknown,yes,high,飞书 staging 包(34MB 3个文件),冻结,先审计,日期命名 可能是临时测试
+GoogleDriveSetup.exe,C:\Users\Administrator\Downloads\GoogleDriveSetup.exe,exe-installer,Downloads,no,no,high,安装器(315MB) 确认已安装后可删,候审,确认依赖,
+DWRG_setup.exe,C:\Users\Administrator\Downloads\DWRG_setup.exe,exe-installer,Downloads,no,no,high,安装器(182MB),候审,确认依赖,
+ocs-2.9.24-setup.exe,C:\Users\Administrator\Downloads\ocs-2.9.24-setup-win-x64.exe,exe-installer,Downloads,no,no,high,安装器(260MB),候审,确认依赖,
+Vortex Installer,C:\Users\Administrator\Downloads\Vortex-1-1-16-6-1772448630.exe,exe-installer,Downloads,no,no,high,Vortex Mod管理器安装器(311MB),候审,确认依赖,
+Trae-Setup-x64.exe,C:\Users\Administrator\Downloads\Trae-Setup-x64.exe,exe-installer,Downloads,no,no,high,Trae IDE安装器(220MB),候审,确认依赖,
+TimeScribe Setup,C:\Users\Administrator\Downloads\TimeScribe-1.11.0-setup.exe,exe-installer,Downloads,no,no,high,TimeScribe安装器(143MB),候审,确认依赖,
+Linear Setup,C:\Users\Administrator\Downloads\Linear Setup 1.28.13 - x64.exe,exe-installer,Downloads,no,no,high,Linear安装器(95MB),候审,确认依赖,
+sysdiag,C:\Users\Administrator\Downloads\sysdiag-all-x64-6.0.9.1-2026.02.28.1.exe,exe-tool,Downloads,no,no,high,系统诊断工具(65MB) 一次性使用,候审,确认依赖,
+Doubao Installer,C:\Users\Administrator\Downloads\Doubao_online_installer.exe,exe-installer,Downloads,no,no,high,豆包在线安装器(7MB),候审,确认依赖,
+Death Stranding Trainer,C:\Users\Administrator\Downloads\Death Stranding Directors Cut v1.0 Plus 26 Trainer.exe,trainer-exe,Downloads,no,no,high,游戏修改器(1.1MB),候审,先审计,
+FLiNG Trainer Generic,C:\Users\Administrator\Downloads\FLiNG_Trainer_c30_.exe.v1.0.Plus.4.Trainer,trainer-exe,Downloads,no,no,high,风灵月影修改器(2.6MB),候审,先审计,
+RE Trainer rar,C:\Users\Administrator\Downloads\Resident.Evil.Requiem.v1.0.Plus.4.Trainer.rar,trainer-archive,Downloads,no,no,high,修改器压缩包(43MB),候审,先审计,
+RE2 Trainer Download,C:\Users\Administrator\Downloads\Resident Evil 2 v1.0-v20220613 Plus 20 Trainer.exe,trainer-exe,Downloads,no,no,high,修改器(1.3MB) 与桌面版重复,候审,先审计,
+gmn-proxy.mjs,C:\Users\Administrator\gmn-proxy.mjs,script,HOME,no,yes,very_high,Gemini代理主脚本(18KB) 可能被计划任务和.vbs调用,候审,确认依赖,旁边有start-gmn-proxy.sh/.vbs
+start-gmn-proxy.sh,C:\Users\Administrator\start-gmn-proxy.sh,script,HOME,no,yes,very_high,代理启动脚本(8KB) 与gmn-proxy.mjs配合使用,候审,确认依赖,
+start-gmn-proxy.vbs,C:\Users\Administrator\start-gmn-proxy.vbs,script,HOME,no,yes,very_high,代理VBS启动器(1.3KB) Windows启动调用入口,候审,确认依赖,可能被开机启动引用
+cc-window-manager.ahk,C:\Users\Administrator\cc-window-manager.ahk,script,HOME,no,no,high,AHK窗口管理(2.5KB) 可能被热键引用,候审,确认依赖,
+codex-watchdog.sh,C:\Users\Administrator\codex-watchdog.sh,script,HOME,no,yes,high,Codex看门狗(6KB) 可能被计划任务调用,候审,确认依赖,
+codex-cron-check.sh,C:\Users\Administrator\codex-cron-check.sh,script,HOME,no,yes,high,Codex定时检查(3.4KB) 可能被cron调用,候审,确认依赖,
+fix-codex.sh,C:\Users\Administrator\fix-codex.sh,script,HOME,no,no,high,Codex修复脚本(13KB),候审,确认依赖,
+fix-network.sh,C:\Users\Administrator\fix-network.sh,script,HOME,no,no,high,网络修复脚本(3KB),候审,确认依赖,
+cc-commands.ps1,C:\Users\Administrator\cc-commands.ps1,script,HOME,no,no,high,CC命令集(2KB),候审,确认依赖,
+cc-tracker.py,C:\Users\Administrator\cc-tracker.py,script,HOME,no,no,high,CC跟踪器(7KB),候审,确认依赖,
+project-launcher.py,C:\Users\Administrator\project-launcher.py,script,HOME,no,yes,high,项目启动器(6KB) 旁边有project-commands.ps1,候审,确认依赖,
+project-commands.ps1,C:\Users\Administrator\project-commands.ps1,script,HOME,no,yes,high,项目命令集(2KB),候审,确认依赖,
+botdrop.apk,C:\Users\Administrator\botdrop.apk,apk,HOME,no,no,high,飞书bot APK(108MB) 移动端构建产物,候审,先审计,应归入botdrop项目目录
+AGENTS.md,C:\Users\Administrator\AGENTS.md,config,HOME,no,yes,very_high,主Agent配置(20KB) 工具从HOME读取,现役,不动,系统级配置 绝不能移
+CLAUDE.md,C:\Users\Administrator\CLAUDE.md,config,HOME,no,yes,very_high,Claude配置(17KB) 工具从HOME读取,现役,不动,系统级配置 绝不能移
+.mcp.json,C:\Users\Administrator\.mcp.json,config,HOME,no,no,very_high,MCP配置(1KB),现役,不动,系统级配置
+.claude.json,C:\Users\Administrator\.claude.json,config,HOME,no,no,very_high,Claude配置(15KB),现役,不动,系统级配置
+batch_upload.py,D:\batch_upload.py,script,D-root,no,yes,high,NLM上传脚本(5KB) 旁边有progress.json,候审,确认依赖,
+check_cdp.py,D:\check_cdp.py,script,D-root,no,no,high,CDP检查(0.2KB),候审,先审计,可能已失效
+debug_cookies.py,D:\debug_cookies.py,script,D-root,no,no,high,Cookie调试(3KB),候审,先审计,
+extract_cookies.py,D:\extract_cookies.py,script,D-root,no,no,high,Cookie提取(4KB),候审,先审计,
+merge_vault.py,D:\merge_vault.py,script,D-root,no,no,high,Vault合并(5KB),候审,先审计,涉及Vault操作 高敏感
+upload_text.py,D:\upload_text.py,script,D-root,no,yes,high,NLM文本上传(5KB),候审,确认依赖,
+upload_progress.json,D:\upload_progress.json,config,D-root,no,yes,high,上传进度(39KB),候审,确认依赖,与batch_upload.py配合
+nlm_text_upload_progress.json,D:\nlm_text_upload_progress.json,config,D-root,no,yes,high,NLM上传进度(4KB),候审,确认依赖,
