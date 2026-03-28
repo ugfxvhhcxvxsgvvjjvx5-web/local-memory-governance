@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Memory Governance - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1a1b1e;
+    --surface: #25262b;
+    --surface2: #2c2e33;
+    --border: #373a40;
+    --text: #c1c2c5;
+    --text-dim: #909296;
+    --text-bright: #e9ecef;
+    --accent: #748ffc;
+    --green: #69db7c;
+    --yellow: #ffd43b;
+    --orange: #ff922b;
+    --red: #ff6b6b;
+    --teal: #38d9a9;
+    --purple: #b197fc;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .card-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+  .card-value .unit { font-size: 16px; color: var(--text-dim); font-weight: 500; }
+  .card-note { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 20px 0 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  th {
+    text-align: left;
+    padding: 10px 12px;
+    background: var(--surface2);
+    color: var(--text-dim);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  tr:hover td { background: rgba(116,143,252,0.04); }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .badge-active { background: rgba(105,219,124,0.15); color: var(--green); }
+  .badge-review { background: rgba(255,212,59,0.15); color: var(--yellow); }
+  .badge-frozen { background: rgba(116,143,252,0.15); color: var(--accent); }
+  .badge-archive { background: rgba(255,146,43,0.15); color: var(--orange); }
+  .badge-delete { background: rgba(255,107,107,0.15); color: var(--red); }
+  .badge-keep { background: rgba(56,217,169,0.15); color: var(--teal); }
+  .section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .decision-box {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .decision-box .label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .decision-box .value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-top: 4px;
+    font-family: 'Courier New', monospace;
+  }
+  .decision-box .note { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+  .progress-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--surface2);
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease;
+  }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+  .cleanup-summary {
+    display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
+  }
+  .cleanup-stat { text-align: center; }
+  .cleanup-stat .num { font-size: 28px; font-weight: 700; }
+  .cleanup-stat .label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
+  .rule-list { list-style: none; padding: 0; }
+  .rule-list li {
+    padding: 6px 0;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .rule-list li::before {
+    content: '//';
+    color: var(--red);
+    font-weight: 700;
+    margin-right: 8px;
+  }
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    background: var(--surface2);
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+  footer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 12px;
+    margin-top: 48px;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<h1>Local Memory Governance</h1>
+<p class="subtitle">2026-03-28 -- Disk scan, classification & cleanup dashboard</p>
+
+<!-- ====== KPI Cards ====== -->
+<div class="grid">
+  <div class="card">
+    <div class="card-title">Total Disk</div>
+    <div class="card-value">5.4 <span class="unit">TB</span></div>
+    <div class="card-note">C: 650 GB / D: 3.2 TB / E: 954 GB / G: 650 GB</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Batch 1 Cleaned</div>
+    <div class="card-value" style="color:var(--green)">948 <span class="unit">MB</span></div>
+    <div class="card-note">23 items deleted, 0 failures</div>
+  </div>
+  <div class="card">
+    <div class="card-title">HOME Scattered Files</div>
+    <div class="card-value" style="color:var(--orange)">137</div>
+    <div class="card-note">classified into 9 categories</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Overlapping Workspaces</div>
+    <div class="card-value" style="color:var(--yellow)">7</div>
+    <div class="card-note">1 active, 1 frozen, 5 archive candidates</div>
+  </div>
+</div>
+
+<!-- ====== Decisions ====== -->
+<h2>Decisions (Written & Final)</h2>
+
+<div class="two-col">
+  <div>
+    <div class="decision-box">
+      <div class="label">Primary Workspace</div>
+      <div class="value">D:\AgentTeam-Workspace</div>
+      <div class="note">64 subdirs, ~87 GB, all new projects go here</div>
+    </div>
+    <div class="decision-box">
+      <div class="label">Core Project Area</div>
+      <div class="value">D:\AgentTeam-Workspace\Dev</div>
+      <div class="note">9 subdirs: personnal research, Learning, sandbox, etc.</div>
+    </div>
+  </div>
+  <div>
+    <div class="decision-box">
+      <div class="label">Primary Vault</div>
+      <div class="value">iCloudDrive\iCloud~md~obsidian</div>
+      <div class="note">iCloud sync, has .git, cross-device active vault</div>
+    </div>
+    <div class="decision-box">
+      <div class="label">Primary Memory System</div>
+      <div class="value">C:\Users\Administrator\memory-v2</div>
+      <div class="note">0.1 MB, 23 files, lightweight semantic memory</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== Rules ====== -->
+<div class="section-card" style="margin-top:16px">
+  <h3 style="margin-top:0">Forbidden Actions</h3>
+  <ul class="rule-list">
+    <li>Do NOT delete Dev</li>
+    <li>Do NOT delete Obsidian Vault</li>
+    <li>Do NOT migrate the primary workspace elsewhere</li>
+    <li>Do NOT create a new workspace on another drive</li>
+    <li>Do NOT delete opencode / my_projects / new idea without audit</li>
+  </ul>
+</div>
+
+<!-- ====== Workspace Map ====== -->
+<h2>Workspace Status Map</h2>
+<div class="section-card">
+<table>
+  <thead><tr><th>Workspace</th><th>Status</th><th>Size</th><th>Note</th></tr></thead>
+  <tbody>
+    <tr><td><strong>D:\AgentTeam-Workspace</strong></td><td><span class="badge badge-active">Active</span></td><td>~87 GB</td><td>Primary, 64 subdirs</td></tr>
+    <tr><td>&nbsp;&nbsp;/Dev</td><td><span class="badge badge-active">Active Core</span></td><td>~10 GB</td><td>9 organized subdirs</td></tr>
+    <tr><td>D:\Projects</td><td><span class="badge badge-frozen">Frozen</span></td><td>14 dirs</td><td>Old workspace, has ObsidianVault</td></tr>
+    <tr><td>D:\Workspace</td><td><span class="badge badge-archive">Archive</span></td><td>tiny</td><td>Abandoned migration</td></tr>
+    <tr><td>D:\Workspace-ing</td><td><span class="badge badge-archive">Archive</span></td><td>tiny</td><td>Abandoned migration</td></tr>
+    <tr><td>~\Projects</td><td><span class="badge badge-archive">Archive</span></td><td>tiny</td><td>HOME Projects, 2 dirs</td></tr>
+    <tr><td>~\codex-work</td><td><span class="badge badge-review">Review</span></td><td>?</td><td>Check if Codex still uses this</td></tr>
+    <tr><td>~\global-project-hub</td><td><span class="badge badge-archive">Archive</span></td><td>?</td><td>Project hub attempt</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ====== AgentTeam Classification ====== -->
+<h2>AgentTeam-Workspace Breakdown</h2>
+<div class="section-card">
+<table>
+  <thead><tr><th>Layer</th><th>Count</th><th>Status</th><th>Next Step</th></tr></thead>
+  <tbody>
+    <tr><td>Tier 1: Core projects (Dev/)</td><td>9 + 1</td><td><span class="badge badge-active">Active</span></td><td>Keep as-is</td></tr>
+    <tr><td>Tier 2: One-off tasks (2026-03-xx_*)</td><td>~22</td><td><span class="badge badge-frozen">Frozen</span></td><td>Future: move to _archive/</td></tr>
+    <tr><td>Tier 3: Standalone tools</td><td>~11</td><td><span class="badge badge-frozen">Frozen</span></td><td>Confirm, then Dev/tools or _archive/</td></tr>
+    <tr><td>Tier 4: Large frozen dirs</td><td>8</td><td><span class="badge badge-frozen">Frozen</span></td><td>Audit one-by-one</td></tr>
+    <tr><td>Tier 5: Infra / misc</td><td>~15</td><td><span class="badge badge-review">Mixed</span></td><td>Mixed handling</td></tr>
+  </tbody>
+</table>
+
+<h3>Top 5 by Size (Frozen, need audit)</h3>
+<table>
+  <thead><tr><th>Directory</th><th>Size</th><th>Last Modified</th></tr></thead>
+  <tbody>
+    <tr><td>opencode</td><td>29.7 GB</td><td>2026-02-14</td></tr>
+    <tr><td>my_projects</td><td>16.8 GB</td><td>2026-01-19</td></tr>
+    <tr><td>new idea</td><td>13.0 GB</td><td>2026-03-25</td></tr>
+    <tr><td>happy-ddz</td><td>3.7 GB</td><td>2026-03-05</td></tr>
+    <tr><td>local-mem-v2</td><td>2.8 GB</td><td>2026-02-20</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ====== HOME Classification ====== -->
+<h2>HOME Root Classification (~137 scattered files)</h2>
+<div class="section-card">
+<table>
+  <thead><tr><th>Category</th><th>Count</th><th>Status</th><th>Destination</th></tr></thead>
+  <tbody>
+    <tr><td>Feishu Research (.md)</td><td>20</td><td><span class="badge badge-frozen">Frozen</span></td><td>Archive or Dev/notes</td></tr>
+    <tr><td>Video Automation Research (.md)</td><td>19</td><td><span class="badge badge-frozen">Frozen</span></td><td>Archive or Dev/notes</td></tr>
+    <tr><td>System Config</td><td>~10</td><td><span class="badge badge-active">Active</span></td><td><strong>Keep in HOME</strong></td></tr>
+    <tr><td>Active Tool Scripts</td><td>~10</td><td><span class="badge badge-review">Review</span></td><td>scripts/ or Dev/tools</td></tr>
+    <tr><td>One-off Scripts</td><td>~14</td><td><span class="badge badge-archive">Archive</span></td><td>Archive</td></tr>
+    <tr><td>Debug Output / Data</td><td>~11</td><td><span class="badge badge-archive">Archive</span></td><td>Archive</td></tr>
+    <tr><td>Large Temp Files</td><td>~25</td><td><span class="badge badge-archive">Archive</span></td><td>Archive or delete</td></tr>
+    <tr><td>Deletable Junk</td><td>~25</td><td><span class="badge badge-delete">Delete</span></td><td>Next cleanup batch</td></tr>
+    <tr><td>Personal Content</td><td>~3</td><td><span class="badge badge-review">Review</span></td><td>Content system (01~05)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ====== Desktop Classification ====== -->
+<h2>Desktop Classification (142 files)</h2>
+<div class="section-card">
+<table>
+  <thead><tr><th>Category</th><th>Count</th><th>Action</th></tr></thead>
+  <tbody>
+    <tr><td>Shortcuts (legit use)</td><td>~75</td><td><span class="badge badge-keep">Keep</span></td></tr>
+    <tr><td>Installers</td><td>2</td><td><span class="badge badge-archive">Move out</span> (~286 MB)</td></tr>
+    <tr><td>Extracted remnants</td><td>3 dirs</td><td><span class="badge badge-archive">Move out</span></td></tr>
+    <tr><td>Game trainers</td><td>~8</td><td><span class="badge badge-review">Review</span></td></tr>
+    <tr><td>Documents</td><td>4</td><td><span class="badge badge-archive">Relocate</span></td></tr>
+    <tr><td>Deletable junk</td><td>~7</td><td><span class="badge badge-delete">Next batch</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ====== Cleanup Report ====== -->
+<h2>Batch 1 Cleanup Results</h2>
+<div class="section-card">
+  <div class="cleanup-summary">
+    <div class="cleanup-stat">
+      <div class="num" style="color:var(--green)">23</div>
+      <div class="label">Items deleted</div>
+    </div>
+    <div class="cleanup-stat">
+      <div class="num" style="color:var(--green)">948</div>
+      <div class="label">MB freed</div>
+    </div>
+    <div class="cleanup-stat">
+      <div class="num" style="color:var(--green)">0</div>
+      <div class="label">Failures</div>
+    </div>
+    <div class="cleanup-stat">
+      <div class="num" style="color:var(--yellow)">10</div>
+      <div class="label">Skipped (non-empty)</div>
+    </div>
+  </div>
+
+  <h3>What was deleted</h3>
+  <table>
+    <thead><tr><th>Category</th><th>Count</th><th>Freed</th></tr></thead>
+    <tbody>
+      <tr><td>Duplicate installers (BaiduNetdisk / GoogleDrive / Antigravity)</td><td>3</td><td>938.6 MB</td></tr>
+      <tr><td>Old logs (gmn-proxy / codex-watchdog / claude-debug / etc.)</td><td>7</td><td>9.7 MB</td></tr>
+      <tr><td>sqlite_mcp_server.db (all 0 bytes, verified)</td><td>11</td><td>0 MB</td></tr>
+      <tr><td>Empty directories</td><td>2</td><td>0 MB</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ====== Memory Systems ====== -->
+<h2>Memory & Vault Systems</h2>
+<div class="two-col">
+  <div class="section-card">
+    <h3 style="margin-top:0">Memory Systems</h3>
+    <table>
+      <thead><tr><th>System</th><th>Size</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>memory-v2</strong></td><td>0.1 MB</td><td><span class="badge badge-active">Primary</span></td></tr>
+        <tr><td>.local-mem</td><td>4.3 GB</td><td><span class="badge badge-frozen">Frozen</span></td></tr>
+        <tr><td>.local-mem-dev</td><td>147 MB</td><td><span class="badge badge-frozen">Frozen</span></td></tr>
+        <tr><td>local-mem-v2</td><td>2.8 GB</td><td><span class="badge badge-frozen">Frozen</span></td></tr>
+        <tr><td>local-mem</td><td>0.8 MB</td><td><span class="badge badge-archive">Archive</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="section-card">
+    <h3 style="margin-top:0">Obsidian Vaults</h3>
+    <table>
+      <thead><tr><th>Vault</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>iCloud~md~obsidian</strong></td><td><span class="badge badge-active">Primary</span></td></tr>
+        <tr><td>D:\Projects\ObsidianVault</td><td><span class="badge badge-frozen">Frozen copy</span></td></tr>
+        <tr><td>backups\obsidian-vault-old</td><td><span class="badge badge-frozen">Backup</span></td></tr>
+        <tr><td>.obsidian-backup-*</td><td><span class="badge badge-frozen">Backup (x3)</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ====== Next Steps ====== -->
+<h2>Suggested Next Steps</h2>
+<div class="section-card">
+  <table>
+    <thead><tr><th>#</th><th>Action</th><th>Impact</th><th>Risk</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Batch 2 cleanup: Downloads old installers (~2.5 GB)</td><td style="color:var(--green)">High</td><td style="color:var(--green)">Low</td></tr>
+      <tr><td>2</td><td>Move HOME Feishu .md files (20) to Archive</td><td style="color:var(--teal)">Medium</td><td style="color:var(--green)">Low</td></tr>
+      <tr><td>3</td><td>Move HOME video-automation .md files (19) to Archive</td><td style="color:var(--teal)">Medium</td><td style="color:var(--green)">Low</td></tr>
+      <tr><td>4</td><td>Move Desktop installers & v2rayN to D:\software</td><td style="color:var(--teal)">Medium</td><td style="color:var(--green)">Low</td></tr>
+      <tr><td>5</td><td>Audit opencode (29.7 GB) contents</td><td style="color:var(--green)">High</td><td style="color:var(--yellow)">Medium</td></tr>
+      <tr><td>6</td><td>Create _archive/ in AgentTeam-Workspace for frozen tasks</td><td style="color:var(--teal)">Medium</td><td style="color:var(--green)">Low</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  local-memory-governance &middot; generated 2026-03-28 &middot; <a href="https://github.com/ugfxvhhcxvxsgvvjjvx5-web/local-memory-governance" style="color:var(--accent);text-decoration:none">GitHub</a>
+</footer>
+
+</body>
+</html>
