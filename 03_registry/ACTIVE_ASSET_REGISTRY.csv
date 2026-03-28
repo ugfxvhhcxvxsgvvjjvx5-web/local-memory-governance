@@ -1,0 +1,25 @@
+name,path,kind,status,owner_area,last_modified,recommended_action,notes
+personnal research,D:\AgentTeam-Workspace\Dev\personnal research,git-repo,现役,Dev,2026-03-28,keep,当前资格系统 V1 主仓库
+Personnal session,D:\AgentTeam-Workspace\Dev\Personnal session,workspace,现役,Dev,2026-03-28,keep,当前工作会话 + 理解报告
+Learning,D:\AgentTeam-Workspace\Dev\Learning,git-repo,现役,Dev,2026-03-19,keep,学习项目集合
+ob life os,D:\AgentTeam-Workspace\Dev\ob life os,git-repo,现役,Dev,2026-03-19,keep,Obsidian 生活系统
+sandbox,D:\AgentTeam-Workspace\Dev\sandbox,git-repo,现役,Dev,2026-03-19,keep,沙盒实验区
+notes,D:\AgentTeam-Workspace\Dev\notes,directory,现役,Dev,2026-03-19,keep,笔记
+Projects,D:\AgentTeam-Workspace\Dev\Projects,directory,现役,Dev,2026-03-19,keep,Dev 下子项目
+tools,D:\AgentTeam-Workspace\Dev\tools,directory,现役,Dev,2026-03-19,keep,工具
+work,D:\AgentTeam-Workspace\Dev\work,directory,现役,Dev,2026-03-19,keep,工作相关
+current_qualification_v1.db,D:\AgentTeam-Workspace\Dev\personnal research\personnal v1\data\current_qualification_v1.db,sqlite-db,现役,Dev,2026-03-28,do NOT delete,当前资格系统主库
+local-memory-governance,D:\AgentTeam-Workspace\local-memory-governance,git-repo,现役,AgentTeam根,2026-03-28,keep,磁盘治理项目(本项目)
+new idea,D:\AgentTeam-Workspace\new idea,project-collection,现役,AgentTeam根,2026-03-25,review contents,13GB 含 codex-on-desk 等活跃子项目
+botdrop-part2,D:\AgentTeam-Workspace\2026-03-10_botdrop-part2,project,候审,AgentTeam根,2026-03-28,check if still active,5.6GB 飞书 bot 项目
+opencode,D:\AgentTeam-Workspace\opencode,tool-install,冻结,AgentTeam根,2026-02-14,review before any action,29.7GB 最大目录
+my_projects,D:\AgentTeam-Workspace\my_projects,project-collection,冻结,AgentTeam根,2026-01-19,review contents,16.8GB 含 whisper 转写
+local-mem-v2,D:\AgentTeam-Workspace\local-mem-v2,memory-system,冻结,AgentTeam根,2026-02-20,review,2.8GB 旧记忆系统
+happy-ddz,D:\AgentTeam-Workspace\happy-ddz,game-project,冻结,AgentTeam根,2026-03-05,archive candidate,3.7GB 斗地主 AI
+doudizhu-ai,D:\AgentTeam-Workspace\doudizhu-ai,game-project,冻结,AgentTeam根,2026-03-05,archive candidate,1.2GB 斗地主 AI (可能与 happy-ddz 重叠)
+bilibili-video-absorber,D:\AgentTeam-Workspace\bilibili-video-absorber,tool,冻结,AgentTeam根,2026-03-05,archive candidate,267MB
+zhihu-scraper,D:\AgentTeam-Workspace\zhihu-scraper,tool,冻结,AgentTeam根,2026-03-05,archive candidate,165MB
+antigravity-auto-accept,D:\AgentTeam-Workspace\antigravity-auto-accept-independent,extension,冻结,AgentTeam根,2026-03-01,keep as reference,Antigravity 自动接受插件
+ObsidianVault,D:\Projects\ObsidianVault,obsidian-vault,冻结,D-Projects,unknown,do NOT delete,唯一有 .obsidian 的正式 Vault
+iCloud-Obsidian,C:\Users\Administrator\iCloudDrive\iCloud~md~obsidian,obsidian-vault,现役,HOME-iCloud,unknown,do NOT delete,iCloud 同步的 Vault
+memory-v2,C:\Users\Administrator\memory-v2,memory-system,现役,HOME,unknown,keep,语义记忆系统
