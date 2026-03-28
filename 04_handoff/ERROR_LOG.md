@@ -148,3 +148,21 @@ navigate to URL: Frame.Goto file:///D:/AgentTeam-Workspace/local-memory-governan
 ### 本轮无新错误
 
 扫描和文件创建全部正常完成。69 个候选对象全部为纯文档/HTML/JSON数据/图片，无高风险资产误入。
+
+---
+
+## 2026-03-28 Round 9 — 低风险拟归位执行前预检
+
+### 本轮任务
+
+对 69 项低风险候选做执行前预检（目标路径/同名冲突/敏感性/人工确认需求）
+
+### 发现的问题（非系统错误）
+
+1. **路径不具体**：`ex-girlfriend-context.json` 的目标写成"01-content 至 05-ideas 体系"，不是绝对路径
+2. **部分对象不该归位而该删**：`tmp-playwright-output.txt` 和 `_tmp_tool_names.txt` 应改为待删候选
+3. **部分对象超出项目范围**：`【ggs心委】_3月_信息反馈表.docx` 与本项目无关
+
+### 本轮无系统错误
+
+预检逻辑全部正常。上述 3 类问题属于上一轮清单编制时的判断精度不足，已在 ISSUES 文件中记录。
