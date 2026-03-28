@@ -114,3 +114,32 @@
 - `04_handoff\EXECUTION_LOG.md`
 - `04_handoff\ERROR_LOG.md`
 - `03_registry\ERROR_PATTERNS.md`
+
+---
+
+## 2026-03-28 Round 6 — DROP_RULES 归位规则体系
+
+**执行者**：Antigravity (Gemini)
+**时间**：2026-03-28 19:56
+
+### 做了什么
+
+1. 阅读全部已有判决文件和分类报告（10 个文件）
+2. 创建 DROP_RULES.md（12 节完整归位规则）：
+   - 总原则 / 研究文档 / 脚本 / 数据文件 / 安装包 / 截图 / 项目与任务 / HOME 白名单 / 桌面硬规则 / 候审机制 / 强制记录 / 已知例外
+3. 创建 DROP_RULES_EXAMPLES.md（18 个具体示例）
+4. 覆盖更新 HANDOFF_NEXT_AI.md（含 DROP_RULES 新增内容）
+5. 追加 EXECUTION_LOG.md 和 ERROR_LOG.md
+6. 检查已有分类和判决之间是否有冲突（未发现冲突）
+7. 推送到 GitHub
+
+### 冲突检查结果
+
+未发现已有分类和已有判决之间的冲突。DROP_RULES 的所有规则与 WORKSPACE_DECISION / PRIMARY_VAULT_DECISION / PRIMARY_MEMORY_SYSTEM_DECISION 保持一致。
+
+### 产出文件
+- `03_registry\DROP_RULES.md`（新建）
+- `02_reports\DROP_RULES_EXAMPLES.md`（新建）
+- `04_handoff\HANDOFF_NEXT_AI.md`（覆盖更新）
+- `04_handoff\EXECUTION_LOG.md`（追加）
+- `04_handoff\ERROR_LOG.md`（追加）
