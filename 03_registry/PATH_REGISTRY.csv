@@ -1,0 +1,34 @@
+name,path,kind,workspace_guess,status_guess,last_modified,size_hint,recommended_action,confidence,notes
+AgentTeam-Workspace,D:\AgentTeam-Workspace,workspace,main,active,2026-03-28,~87GB,keep as main workspace,high,64 subdirs - needs internal cleanup
+AgentTeam-Dev,D:\AgentTeam-Workspace\Dev,workspace-core,main,active,2026-03-19,~10GB,keep - core project area,high,9 well-organized subdirs
+personnal-research,D:\AgentTeam-Workspace\Dev\personnal research,git-repo,main,active,2026-03-28,variable,keep - current main project,high,personnal v1 = current qualification system
+Personnal-session,D:\AgentTeam-Workspace\Dev\Personnal session,workspace,main,active,2026-03-28,variable,keep - current session,high,contains doc/ with understanding reports
+local-memory-governance,D:\AgentTeam-Workspace\local-memory-governance,workspace,main,active,2026-03-28,tiny,keep - this project,high,disk governance project
+opencode,D:\AgentTeam-Workspace\opencode,tool-install,main,frozen,2026-02-14,29756MB,review - may contain important config,medium,largest dir in workspace
+my_projects,D:\AgentTeam-Workspace\my_projects,project-collection,main,frozen,2026-01-19,16768MB,review contents,medium,whisper_auto_transcribe inside
+new-idea,D:\AgentTeam-Workspace\new idea,project-collection,main,active,2026-03-25,13030MB,review - has recent activity,medium,contains codex-on-desk subproject
+botdrop-part2,D:\AgentTeam-Workspace\2026-03-10_botdrop-part2,one-off-task,main,review,2026-03-28,5607MB,check if still needed,medium,feishu bot project
+happy-ddz,D:\AgentTeam-Workspace\happy-ddz,game-project,main,frozen,2026-03-05,3716MB,archive candidate,low,card game AI project
+doudizhu-ai,D:\AgentTeam-Workspace\doudizhu-ai,game-project,main,frozen,2026-03-05,1242MB,archive candidate,low,duplicate concept with happy-ddz?
+local-mem-v2,D:\AgentTeam-Workspace\local-mem-v2,memory-system,main,frozen,2026-02-20,2816MB,review - memory system v2,medium,local memory system attempt
+D-Projects,D:\Projects,workspace,old,frozen,unknown,unknown,freeze - old workspace,high,14 subdirs including ObsidianVault
+ObsidianVault,D:\Projects\ObsidianVault,obsidian-vault,old,frozen,unknown,unknown,do NOT delete - may be only formal vault,high,has .obsidian directory
+D-Workspace,D:\Workspace,workspace,migration-remnant,abandoned,unknown,tiny,archive candidate,high,incomplete migration with MIGRATION-INVENTORY.md
+D-Workspace-ing,D:\Workspace-ing,workspace,migration-remnant,abandoned,unknown,tiny,merge back to AgentTeam then archive,high,only 2 projects
+HOME-Projects,C:\Users\Administrator\Projects,workspace,home,abandoned,unknown,tiny,merge to D then archive,high,only local-mem-v2 and win11-perfecting
+HOME-codex-work,C:\Users\Administrator\codex-work,workspace,home,review,unknown,unknown,check if Codex still uses this,medium,Codex working directory
+HOME-global-hub,C:\Users\Administrator\global-project-hub,workspace,home,abandoned,unknown,unknown,archive candidate,medium,project hub attempt
+iCloud-Obsidian,C:\Users\Administrator\iCloudDrive\iCloud~md~obsidian,obsidian-vault,home,active,unknown,unknown,do NOT delete - has git and sync,high,iCloud synced vault
+Obsidian-backup,C:\Users\Administrator\backups\obsidian-vault-old,backup,home,frozen,unknown,unknown,keep as backup,medium,old vault backup
+HOME-root-md-files,C:\Users\Administrator\*.md,scattered-docs,home,unclassified,varies,~700KB total,collect into one dir,high,47 files including FEISHU series
+HOME-root-scripts,C:\Users\Administrator\*.py|*.ps1|*.sh,scattered-scripts,home,unclassified,varies,~180KB total,collect into one dir,high,26 scripts across all topics
+HOME-root-json,C:\Users\Administrator\*.json,scattered-data,home,unclassified,varies,~7MB total,collect into one dir,high,research data and configs
+Desktop-installers,C:\Users\Administrator\Desktop\*.exe,installer,desktop,garbage,varies,~275MB,safe to clean,high,game trainers and old installers
+Desktop-v2rayN,C:\Users\Administrator\Desktop\v2rayN-windows-64,tool-install,desktop,misplaced,varies,~143MB,move to proper location,high,should not live on Desktop
+Downloads-dupes,C:\Users\Administrator\Downloads\*duplicate*,duplicate-download,downloads,garbage,varies,~960MB,safe to clean,high,BaiduNetdisk x2 + GoogleDrive x2 + Antigravity x2
+Downloads-installers,C:\Users\Administrator\Downloads\*.exe,installer,downloads,garbage,varies,~2.5GB,safe to clean after verify,medium,old installers already installed
+sqlite_mcp_server.db,multiple locations,database-residue,scattered,garbage,varies,tiny each,safe to delete all except one,high,11+ copies scattered everywhere
+D-root-scripts,D:\*.py,scattered-scripts,d-root,unclassified,varies,~27KB,collect or remove,high,NLM upload scripts
+current_qualification_v1.db,D:\AgentTeam-Workspace\Dev\personnal research\personnal v1\data\current_qualification_v1.db,project-db,main,active,varies,small,do NOT delete,high,main project database
+gmn-proxy-debug.log,C:\Users\Administrator\gmn-proxy-debug.log,log,home,garbage,varies,8.9MB,safe to delete,high,debug log
+botdrop.apk,C:\Users\Administrator\botdrop.apk,mobile-build,home,review,varies,108MB,move or archive,medium,feishu bot APK
