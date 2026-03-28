@@ -231,3 +231,40 @@
 - `04_handoff\HANDOFF_NEXT_AI.md`（覆盖更新）
 - `04_handoff\EXECUTION_LOG.md`（追加）
 - `04_handoff\ERROR_LOG.md`（追加）
+
+---
+
+## 2026-03-28 Round 10 — 项目归属审计
+
+**执行者**：Antigravity (Gemini)
+**时间**：2026-03-28 21:22
+
+### 做了什么
+
+1. 扫描 AgentTeam-Workspace 下的飞书/视频/Botdrop 项目目录
+2. 发现飞书项目有 2 个、视频项目有 1 个（bilibili-video-absorber）
+3. 创建 PROJECT_OWNERSHIP_RULES.md（5 条规则 + 判定流程 + 关键词映射）
+4. 创建 PROJECT_OWNERSHIP_AUDIT.md（69 项重分 5 类）
+5. 创建 OWNERSHIP_REVIEW_MANIFEST.csv（69 条重新分类）
+6. 创建 LOW_RISK_BATCH1_REVISED.md（原 55 项暂停，仅 7 项真散落可走中央）
+7. 新增错误模式 #8（按类型整理破坏项目上下文）
+8. 覆盖更新 HANDOFF_NEXT_AI.md
+9. 推送到 GitHub
+
+### 核心发现
+
+之前"可自动执行"的 55 项中，43 项实际属于具体项目的上下文文档。按类型送到 Dev\notes\ 会破坏项目上下文完整性。
+
+### 本轮说明
+
+**只完成审计，没有执行任何移动。APPROVED_BATCH1.csv 已暂停。**
+
+### 产出文件
+- `03_registry\PROJECT_OWNERSHIP_RULES.md`（新建）
+- `02_reports\PROJECT_OWNERSHIP_AUDIT.md`（新建）
+- `03_registry\OWNERSHIP_REVIEW_MANIFEST.csv`（新建）
+- `02_reports\LOW_RISK_BATCH1_REVISED.md`（新建）
+- `04_handoff\HANDOFF_NEXT_AI.md`（覆盖更新）
+- `04_handoff\EXECUTION_LOG.md`（追加）
+- `04_handoff\ERROR_LOG.md`（追加）
+- `03_registry\ERROR_PATTERNS.md`（新增模式 #8）

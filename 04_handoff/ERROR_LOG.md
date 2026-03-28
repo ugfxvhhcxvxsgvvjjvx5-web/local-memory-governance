@@ -166,3 +166,19 @@ navigate to URL: Frame.Goto file:///D:/AgentTeam-Workspace/local-memory-governan
 ### 本轮无系统错误
 
 预检逻辑全部正常。上述 3 类问题属于上一轮清单编制时的判断精度不足，已在 ISSUES 文件中记录。
+
+---
+
+## 2026-03-28 Round 10 — 项目归属审计
+
+### 本轮任务
+
+项目归属审计：重新按"项目归属优先"审查 69 项候选
+
+### 发现的系统性问题
+
+**按文件类型整理破坏项目上下文**：之前按 .md / .html / .json 类型将文件送到中央 Dev\notes\，但这 43 项实际属于飞书集成和视频自动化两个具体项目。拆到中央 notes 会破坏项目的上下文完整性。
+
+### 处理
+
+已新增 ERROR_PATTERNS #8，创建 PROJECT_OWNERSHIP_RULES.md，暂停 APPROVED_BATCH1.csv。

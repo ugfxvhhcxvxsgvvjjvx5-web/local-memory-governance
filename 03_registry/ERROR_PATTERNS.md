@@ -272,3 +272,45 @@
 ### 当前状态
 
 * 已解决 — 通过 HIGH_RISK_NO_MOVE_RULES.md 正式纠偏
+
+---
+
+## 8. 按文件类型整理破坏项目上下文
+
+### 典型表现
+
+* 项目自己的研究文档（需求分析、设计 review、数据采集 HTML）被按 .md / .html / .json 类型归入中央 `Dev\notes\` 或 `Archive\`
+* 文件从项目语境中脱离，变成"孤立的文档"
+* 未来想回溯某个项目的研究过程时，找不到配套文档
+
+### 常见触发条件
+
+* 以"文件类型"为第一分类维度（.md → notes / .html → web-captures / .json → research-data）
+* 没有先判断"这个文件属于哪个项目"
+* 误以为"统一收纳 = 整洁"，忽略了项目上下文的价值
+* `Dev\notes\` 被设计成"万能收纳箱"但实际吞并了项目文档
+
+### 已出现位置
+
+* Round 8-9 中 55 项"可自动执行"中，43 项实际属于飞书集成和视频自动化两个项目
+* 20 个飞书文档差点被送到 Dev\notes\feishu-research（应去项目 docs\）
+* 14 个视频文档差点被送到 Dev\notes\video-automation-research（应去 bilibili-video-absorber\docs\）
+* 9 个飞书 HTML 差点被送到 Archive\web-captures（应去项目 captures\）
+
+### 已知解决方式
+
+* 创建 PROJECT_OWNERSHIP_RULES.md：先按项目归属判，再按文件类型判
+* 暂停 APPROVED_BATCH1.csv，改用 OWNERSHIP_REVIEW_MANIFEST.csv
+* 项目文档默认跟项目走，不进中央目录
+
+### 规避规则
+
+* 遇到文件先问："这个文件属于哪个项目？"
+* 文件名含项目关键词（feishu / video / botdrop）→ 属于该项目
+* 只有确认"不属于任何项目"的文件才进中央 Archive / notes
+* `Dev\notes\` 只用于"真正不属于任何项目的散落研究"
+* 项目文档去项目自己的 doc/ / docs/ / research/ / captures/
+
+### 当前状态
+
+* 已解决 — 通过 PROJECT_OWNERSHIP_RULES.md 正式纠偏
