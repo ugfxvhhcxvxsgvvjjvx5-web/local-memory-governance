@@ -268,3 +268,39 @@
 - `04_handoff\EXECUTION_LOG.md`（追加）
 - `04_handoff\ERROR_LOG.md`（追加）
 - `03_registry\ERROR_PATTERNS.md`（新增模式 #8）
+
+---
+
+## 2026-03-28 Round 11 — 批次 3B 项目归属归位执行
+
+**执行者**：Antigravity (Gemini)
+**时间**：2026-03-28 21:29
+
+### 做了什么
+
+1. 创建 4 个目标目录
+2. 移动 20 飞书 md → `openclaw-feishu-setup\docs\`（20/20 成功）
+3. 移动 9 飞书 html → `openclaw-feishu-setup\captures\`（9/9 成功）
+4. 移动 13 视频 md → `bilibili-video-absorber\docs\research\`（13/13 成功）
+5. 移动 2 html → `D:\Archive\web-captures\`（2/2 成功）
+6. 移动 5 json → `D:\Archive\research-data-2026\`（5/5 成功）
+7. 验证全部目标目录文件计数
+8. 覆盖更新 HANDOFF_NEXT_AI.md
+9. 追加 EXECUTION_LOG / ERROR_LOG
+10. 推送到 GitHub
+
+### 归位结果
+
+| 批次 | 数量 | 成功 | 失败 | 目标 |
+|------|------|------|------|------|
+| 飞书 md | 20 | 20 | 0 | openclaw-feishu-setup\docs\ |
+| 飞书 html | 9 | 9 | 0 | openclaw-feishu-setup\captures\ |
+| 视频 md | 13 | 13 | 0 | bilibili-video-absorber\docs\research\ |
+| 散落 html | 2 | 2 | 0 | D:\Archive\web-captures\ |
+| 散落 json | 5 | 5 | 0 | D:\Archive\research-data-2026\ |
+| **合计** | **49** | **49** | **0** | — |
+
+### 产出文件
+- `04_handoff\HANDOFF_NEXT_AI.md`（覆盖更新）
+- `04_handoff\EXECUTION_LOG.md`（追加）
+- `04_handoff\ERROR_LOG.md`（追加）

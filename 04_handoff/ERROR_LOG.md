@@ -182,3 +182,15 @@ navigate to URL: Frame.Goto file:///D:/AgentTeam-Workspace/local-memory-governan
 ### 处理
 
 已新增 ERROR_PATTERNS #8，创建 PROJECT_OWNERSHIP_RULES.md，暂停 APPROVED_BATCH1.csv。
+
+---
+
+## 2026-03-28 Round 11 — 批次 3B 执行归位
+
+### 本轮任务
+
+执行 49 项归位（20 飞书md + 9 飞书html + 13 视频md + 2 散落html + 5 散落json）
+
+### 本轮无新错误
+
+49 项全部成功移动，0 失败。目标目录文件计数验证通过。
