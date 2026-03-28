@@ -172,3 +172,32 @@
 - `04_handoff\EXECUTION_LOG.md`（追加）
 - `04_handoff\ERROR_LOG.md`（追加）
 - `03_registry\ERROR_PATTERNS.md`（追加新模式）
+
+---
+
+## 2026-03-28 Round 8 — 批次 3A 低风险拟归位清单
+
+**执行者**：Antigravity (Gemini)
+**时间**：2026-03-28 20:42
+
+### 做了什么
+
+1. 扫描 HOME 根和桌面全部低风险文件（排除高风险类型）
+2. 创建 LOW_RISK_REHOME_CANDIDATES.md（69 个候选按 10 类分堆）
+3. 创建 LOW_RISK_MOVE_MANIFEST.csv（69 条含来源/目标/确认标记）
+4. 创建 LOW_RISK_REHOME_RULES.md（低风险清单准入标准）
+5. 覆盖更新 HANDOFF_NEXT_AI.md
+6. 追加 EXECUTION_LOG.md 和 ERROR_LOG.md
+7. 推送到 GitHub
+
+### 本轮说明
+
+**只列清单，没有实际移动任何文件。** 69 项中 58 项可自动执行，11 项需人工确认。
+
+### 产出文件
+- `02_reports\LOW_RISK_REHOME_CANDIDATES.md`（新建）
+- `03_registry\LOW_RISK_MOVE_MANIFEST.csv`（新建）
+- `02_reports\LOW_RISK_REHOME_RULES.md`（新建）
+- `04_handoff\HANDOFF_NEXT_AI.md`（覆盖更新）
+- `04_handoff\EXECUTION_LOG.md`（追加）
+- `04_handoff\ERROR_LOG.md`（追加）
